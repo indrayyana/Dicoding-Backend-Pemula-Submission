@@ -1,10 +1,8 @@
-const { nanoid } = require('nanoid');
+const {nanoid} = require('nanoid');
 const books = require('./books');
 
 const addBookHandler = (request, h) => {
-  const {
-    name, year, author, summary, publisher, pageCount, readPage, reading,
-  } = request.payload;
+  const {name, year, author, summary, publisher, pageCount, readPage, reading} = request.payload;
 
   const id = nanoid(16);
   const finished = pageCount === readPage;
@@ -69,7 +67,7 @@ const addBookHandler = (request, h) => {
 };
 
 const getAllBooksHandler = (request, h) => {
-  const { name, reading, finished } = request.query;
+  const {name, reading, finished} = request.query;
 
   const lower = (text) => text.toLowerCase();
   if (name !== undefined) {
@@ -141,7 +139,7 @@ const getAllBooksHandler = (request, h) => {
 };
 
 const getBookByIdHandler = (request, h) => {
-  const { bookId } = request.params;
+  const {bookId} = request.params;
 
   const book = books.filter((b) => b.id === bookId)[0];
 
@@ -165,11 +163,9 @@ const getBookByIdHandler = (request, h) => {
 };
 
 const editBookByIdHandler = (request, h) => {
-  const { bookId } = request.params;
+  const {bookId} = request.params;
 
-  const {
-    name, year, author, summary, publisher, pageCount, readPage, reading,
-  } = request.payload;
+  const {name, year, author, summary, publisher, pageCount, readPage, reading} = request.payload;
   const updatedAt = new Date().toISOString();
 
   if (name === undefined) {
@@ -223,7 +219,7 @@ const editBookByIdHandler = (request, h) => {
 };
 
 const deleteBookByIdHandler = (request, h) => {
-  const { bookId } = request.params;
+  const {bookId} = request.params;
 
   const index = books.findIndex((book) => book.id === bookId);
 
